@@ -1,0 +1,9 @@
+<button (click)="onLoadValues()" class="btn btn-primary btn-sm">LoadValues</button>
+<ul>
+  <li *ngFor="let xValue of values">{{xValue.xID}}-{{xValue.xTitle}}</li>
+</ul>
+<hr>
+<input type="number" [(ngModel)]="id" id=idValue> ID Is : {{id}}
+<br><br>
+<button (click)="onLoadValue()" class="btn btn-success btn-sm">LoadValue<i class="fab fa-angular"></i></button>
+<h2 *ngIf="value">Chosed Value Is : {{value.xID}}-{{value.xTitle}}</h2>
