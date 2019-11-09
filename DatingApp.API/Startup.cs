@@ -1,4 +1,5 @@
 using DatingApp.API.model;
+using DatingApp.API.Repository.Auth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +24,10 @@ namespace DatingApp.API
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("DatingConnection"));
             });
+
             services.AddControllers();
             services.AddCors();
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
