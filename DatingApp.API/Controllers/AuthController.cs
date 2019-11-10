@@ -38,8 +38,6 @@ namespace DatingApp.API.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserForLoginVM userForLogin)
         {
-            throw new Exception("This Is Custom Error Throwned!!!!");
-            
             var user = await _AuthRepository.Login(userForLogin.Username.ToLower(), userForLogin.Password);
             if (user == null)
                 return BadRequest("نام کاربری با پسورد اشتباه است!");

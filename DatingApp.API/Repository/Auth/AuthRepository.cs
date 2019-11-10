@@ -60,8 +60,11 @@ namespace DatingApp.API.Repository.Auth
             using (var hmac = new System.Security.Cryptography.HMACSHA512(user.PasswordSalt))
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                if (computedHash.ToString() != user.PasswordHash.ToString())
-                    return false;
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != user.PasswordHash[i])
+                        return false;
+                }
             }
             return true;
         }
