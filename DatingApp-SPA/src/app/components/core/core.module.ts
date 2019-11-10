@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CoreRoutingModule } from './core-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
+import { ErrorInterceptor } from './error.interceptor';
 
 
 @NgModule({
@@ -21,6 +22,9 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   exports: [
     CoreRoutingModule,

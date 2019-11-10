@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
       res => {
         this.isLoggedIn = true;
       },
-      error => console.log(error.error)
+      error => console.log(error)
     );
   }
 
