@@ -1,6 +1,8 @@
 using System.Net;
 using System.Text;
+using AutoMapper;
 using DatingApp.API.model;
+using DatingApp.API.Repository;
 using DatingApp.API.Repository.Auth;
 using DatingApp.API.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,7 +36,12 @@ namespace DatingApp.API
 
             services.AddControllers();
             services.AddCors();
+            services.AddAutoMapper();
+            services.AddMvc().AddNewtonsoftJson(opt =>
+                         opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddTransient<SeedData>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
                 opt.TokenValidationParameters = new TokenValidationParameters
@@ -47,7 +54,7 @@ namespace DatingApp.API
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedData seeder)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
@@ -67,6 +74,9 @@ namespace DatingApp.API
                     });
                 });
             }
+
+            //UnComment For Seed User
+            // seeder.SeedUser();
 
             //Baraye Authentication Tartibe In Mavared Mohem Ast
             app.UseCors(i => i.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

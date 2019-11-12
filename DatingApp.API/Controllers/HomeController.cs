@@ -16,20 +16,5 @@ namespace DatingApp.API.Controllers
             this._context = context;
 
         }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var xValueList = await _context.ValueTable.ToListAsync();
-            return Ok(xValueList);
-        }
-
-        [AllowAnonymous]
-        [HttpGet("{xID}")]
-        public async Task<IActionResult> Get(int xID)
-        {
-            var xValue = await _context.ValueTable.FirstOrDefaultAsync(i => i.xID == xID);
-            return Ok(xValue);
-        }
     }
 }
