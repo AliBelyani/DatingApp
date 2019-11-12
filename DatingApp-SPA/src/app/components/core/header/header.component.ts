@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Login } from '../auth.model';
 import { AlertifyService } from '../../shared/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
   loginModel: Login = new Login();
   decodedToken: any;
 
-  constructor(private authService: AuthService, private alertify: AlertifyService) { }
+  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
     this.isLogin();
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.alertify.success('Logged Out Successfully');
+    this.router.navigate(['']);
   }
 
   loadTokenData() {
