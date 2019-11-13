@@ -10,7 +10,6 @@ import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptor } from './error.interceptor';
 
-
 @NgModule({
   declarations: [
     HomeComponent,
@@ -23,7 +22,8 @@ import { ErrorInterceptor } from './error.interceptor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

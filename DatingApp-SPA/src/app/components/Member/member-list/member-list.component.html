@@ -1,1 +1,7 @@
-Member List Work
+<div class="container">
+  <div class="row">
+    <div *ngFor="let xUser of users" class="col-md-2">
+      <app-member-list-item [user]="xUser"></app-member-list-item>
+    </div>
+  </div>
+</div>

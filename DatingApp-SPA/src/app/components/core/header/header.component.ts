@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
       res => {
         this.alertify.success('Logged In Successfully');
         this.loadTokenData();
+        this.router.navigate(['/member']);
       },
       error => this.alertify.error(error)
     );
