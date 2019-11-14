@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.API.model.Entities.Users;
@@ -40,5 +42,19 @@ namespace DatingApp.API.Controllers
 
             return BadRequest($"User With Id {id} Not Exist!!");
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _DatingRepository.GetUser(id);
+            _mapper.Map(userForUpdateDto, user);
+
+            await _DatingRepository.SaveAll();
+            return NoContent();
+        }
+
     }
 }

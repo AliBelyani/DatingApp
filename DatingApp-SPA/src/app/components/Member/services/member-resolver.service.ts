@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { User } from '../User/user.model';
+import { User } from '../../User/user.model';
 import { Observable } from 'rxjs';
-import { UserService } from '../User/user.service';
-import { AlertifyService } from '../shared/alertify.service';
+import { UserService } from '../../User/user.service';
+import { AlertifyService } from '../../shared/alertify.service';
 
 @Injectable({
   providedIn: 'root'

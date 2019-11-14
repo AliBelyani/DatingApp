@@ -9,16 +9,20 @@ import { MemberComponent } from './member.component';
 import { MemberListItemComponent } from './member-list/member-list-item/member-list-item.component';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { MemberEditComponent } from './member-edit/member-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     MemberComponent,
     MemberListComponent,
     MemberListItemComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MemberRoutingModule,
     TabsModule.forRoot(),
     NgxGalleryModule
