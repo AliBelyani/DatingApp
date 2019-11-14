@@ -36,6 +36,7 @@ namespace DatingApp.API
 
             services.AddControllers();
             services.AddCors();
+            services.Configure<CloudinarySetting>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddMvc().AddNewtonsoftJson(opt =>
                          opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -76,9 +77,9 @@ namespace DatingApp.API
             }
 
             //UnComment For Seed User
-            // seeder.SeedUser();
+            //seeder.SeedUser();
 
-            //Baraye Authentication Tartibe In Mavared Mohem Ast
+            //Baraye Authentication Tartibe In Mavared Mohem Ast.
             app.UseCors(i => i.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
             app.UseAuthentication();

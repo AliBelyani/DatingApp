@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
     <a class="navbar-brand" [routerLink]="['']">{{appTitle}}</a>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <ng-template [ngIf]="isLogin()">
@@ -27,11 +26,14 @@
       </ul>
 
       <div class="dropdown" *ngIf="isLogin()" dropdown>
+        <span *ngIf="currentUser" class="mr-1">
+          <img src="{{photoUrl}}" alt="{{currentUser.knownAs}}">
+        </span>
         <a class="dropdown-toggle text-light" style="cursor: pointer;" dropdownToggle>
           Wellcome {{decodedToken.unique_name | titlecase}}
         </a>
         <div class="dropdown-menu" *dropdownMenu>
-          <a class="dropdown-item"  [routerLink]="['/member/edit']"><i class="fa fa-user"></i>Edit Profile</a>
+          <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-user"></i>Edit Profile</a>
           <div class="dropdown divider"></div>
           <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
         </div>

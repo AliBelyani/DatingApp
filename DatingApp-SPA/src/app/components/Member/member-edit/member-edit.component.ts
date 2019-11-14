@@ -13,6 +13,7 @@ import { AuthService } from '../../core/auth.service';
 })
 export class MemberEditComponent implements OnInit {
   user: User;
+  photoUrl: string;
   @ViewChild('memberForm', null) memberForm: NgForm;
   @HostListener('window:beforeunload', ['$event']) unloadNotify($event: any) {
     if (this.memberForm.dirty) {
@@ -27,10 +28,12 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(
       (data: Data) => this.user = data.userEdit
     );
+
+    this.authService.photoUrlSubject.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   onSubmit() {
-    this.userService.updateUser(+this.authService.getDecodedToken().nameid, this.user).subscribe(
+    this.userService.updateUser(this.authService.getDecodedToken().nameid, this.user).subscribe(
       (data) => {
         console.log(this.user);
         this.alertify.success('Profile Updated Successfully!');
@@ -40,5 +43,4 @@ export class MemberEditComponent implements OnInit {
     );
 
   }
-
 }

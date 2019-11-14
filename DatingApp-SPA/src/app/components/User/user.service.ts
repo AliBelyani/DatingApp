@@ -9,20 +9,28 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl = environment.apiUrl + 'user/';
+  baseUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl);
+    return this.httpClient.get<User[]>(this.baseUrl + 'user/');
   }
 
   getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(this.baseUrl + id);
+    return this.httpClient.get<User>(this.baseUrl + 'user/' + id);
   }
 
   updateUser(id: number, user: User) {
-    return this.httpClient.put(this.baseUrl + id, user);
+    return this.httpClient.put(this.baseUrl + 'user/' + id, user);
+  }
+
+  setMainPhoto(userId: number, Id: number) {
+    return this.httpClient.post(this.baseUrl + 'photo/' + userId + '/' + Id + '/SetMain', null);
+  }
+
+  deletePhoto(id: number) {
+   return this.httpClient.delete(this.baseUrl + 'photo/' + id);
   }
 
 }

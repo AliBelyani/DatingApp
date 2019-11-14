@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule, CustomHammerConfig } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { MemberRoutingModule } from './member-routing.module';
 import { MemberListComponent } from './member-list/member-list.component';
@@ -11,6 +12,7 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { FormsModule } from '@angular/forms';
+import { MemberPhotoComponent } from './member-photo/member-photo.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,16 @@ import { FormsModule } from '@angular/forms';
     MemberListComponent,
     MemberListItemComponent,
     MemberDetailComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    MemberPhotoComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MemberRoutingModule,
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }

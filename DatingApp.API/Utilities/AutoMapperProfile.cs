@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using DatingApp.API.model.Entities.Users;
+using DatingApp.API.model.VM.PhotoVM;
 using DatingApp.API.model.VM.UserVM;
 
 namespace DatingApp.API.Utilities
@@ -29,6 +30,8 @@ namespace DatingApp.API.Utilities
                     });
             CreateMap<UserPhoto, UserPhotoDto>();
             CreateMap<UserForUpdateDto, User>();
+            CreateMap<UserPhoto, PhotoForReturnDto>();
+            CreateMap<PhotoForAdd, UserPhoto>();
         }
     }
 }

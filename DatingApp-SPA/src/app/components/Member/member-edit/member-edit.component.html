@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img src="{{user.photoUrl}}" alt="{{user.knownAs}}" class="card-image-top img-thumbnail">
+        <img src="{{photoUrl}}" alt="{{user.knownAs}}" class="card-image-top img-thumbnail">
         <div class="card-body">
           <div>
             <strong>Locations:</strong>
@@ -32,7 +32,8 @@
           </div>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-success btn-block" [disabled]="!memberForm.dirty" form="formMember">Save</button>
+          <button type="submit" class="btn btn-success btn-block" [disabled]="!memberForm.dirty"
+            form="formMember">Save</button>
         </div>
       </div>
     </div>
@@ -57,7 +58,7 @@
             </form>
           </tab>
           <tab heading="Edit Photo">
-            <h4>Photo Edit</h4>
+            <app-member-photo [photos]="user.userPhoto"></app-member-photo>
           </tab>
         </tabset>
       </div>
