@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TabsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule, CustomHammerConfig } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { MemberRoutingModule } from './member-routing.module';
 import { MemberListComponent } from './member-list/member-list.component';
@@ -21,7 +22,8 @@ import { MemberPhotoComponent } from './member-photo/member-photo.component';
     MemberListItemComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    MemberPhotoComponent
+    MemberPhotoComponent,
+    TimeAgoPipe
   ],
   imports: [
     CommonModule,
