@@ -4,6 +4,8 @@ import { TabsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule, CustomHammerConfig } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { PaginationModule } from 'ngx-bootstrap';
+import { ButtonsModule } from 'ngx-bootstrap';
 
 import { MemberRoutingModule } from './member-routing.module';
 import { MemberListComponent } from './member-list/member-list.component';
@@ -31,7 +33,9 @@ import { MemberPhotoComponent } from './member-photo/member-photo.component';
     MemberRoutingModule,
     TabsModule.forRoot(),
     NgxGalleryModule,
-    FileUploadModule
+    FileUploadModule,
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }

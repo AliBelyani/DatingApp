@@ -22,3 +22,10 @@ export interface Photo {
   registerDate: Date;
   isMain: boolean;
 }
+
+export class UserSearchParam {
+  gender: string;
+  minAge: number;
+  maxAge: number;
+  orderBy: string;
+}
