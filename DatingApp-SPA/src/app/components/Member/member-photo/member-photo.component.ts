@@ -32,7 +32,7 @@ export class MemberPhotoComponent implements OnInit {
 
   initUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'photo/' + this.authService.getDecodedToken().nameid,
+      url: this.baseUrl + 'photo/' + this.authService.decodedToken.nameid,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image'],
@@ -53,12 +53,17 @@ export class MemberPhotoComponent implements OnInit {
           isMain: res.isMain
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.photoUrlSubject.next(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+        }
       }
     };
   }
 
   setMainPhoto(photo: Photo) {
-    this.userService.setMainPhoto(this.authService.getDecodedToken().nameid, photo.id).subscribe(
+    this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(
       (data: Data) => {
         this.alertify.success('Successfully Set To Main!');
         this.currentMainPhoto = this.photos.find(
@@ -70,12 +75,8 @@ export class MemberPhotoComponent implements OnInit {
         photo.isMain = true;
         this.authService.photoUrlSubject.next(photo.url);
         this.authService.currentUser = JSON.parse(localStorage.getItem('user'));
-        console.log(this.authService.currentUser);
-        console.log(this.authService.currentUser.photoUrl);
         this.authService.currentUser.photoUrl = photo.url;
-        console.log(this.authService.currentUser.photoUrl);
         localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
-        console.log(this.authService.currentUser.photoUrl);
       },
       (error) => this.alertify.error(error)
     );

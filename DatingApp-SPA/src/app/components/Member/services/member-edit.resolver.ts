@@ -16,7 +16,7 @@ export class MemberEditResolver implements Resolve<User>{
     private alertify: AlertifyService, private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
-    const id = this.authService.getDecodedToken().nameid;
+    const id = this.authService.decodedToken.nameid;
     return this.userService.getUser(id).pipe(
       catchError(error => {
         this.alertify.error(error);

@@ -3,7 +3,7 @@ import { AuthService } from '../auth.service';
 import { Login } from '../auth.model';
 import { AlertifyService } from '../../shared/alertify.service';
 import { Router } from '@angular/router';
-import { User } from '../../User/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-header',
@@ -13,26 +13,20 @@ import { User } from '../../User/user.model';
 export class HeaderComponent implements OnInit {
   appTitle = 'DatingApp';
   loginModel: Login = new Login();
-  decodedToken: any;
-  currentUser: User;
   photoUrl: string;
+  jwtHelper = new JwtHelperService();
 
-  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
+    this.authService.photoUrlSubject.subscribe(photoUrl => this.photoUrl = photoUrl);
     this.isLogin();
-    this.loadTokenData();
-    this.getCurrentUser();
-    this.authService.photoUrlSubject.subscribe(
-      (data: string) => this.photoUrl = data
-    );
   }
 
   onLogin() {
     this.authService.login(this.loginModel).subscribe(
       res => {
         this.alertify.success('Logged In Successfully');
-        this.loadTokenData();
         this.router.navigate(['/member']);
       },
       error => this.alertify.error(error)
@@ -46,17 +40,10 @@ export class HeaderComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    this.authService.currentUser = null;
+    this.authService.decodedToken = null;
     this.alertify.success('Logged Out Successfully');
     this.router.navigate(['']);
-  }
-
-  loadTokenData() {
-    this.decodedToken = this.authService.getDecodedToken();
-  }
-
-  getCurrentUser() {
-    this.currentUser = this.authService.getCurrentUser();
-    this.authService.photoUrlSubject.next(this.currentUser.photoUrl);
   }
 
 }

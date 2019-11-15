@@ -33,9 +33,9 @@ namespace DatingApp.API.Controllers
             if (await _AuthRepository.UserExists(userForRegisterVM.Username))
                 return BadRequest("نام کاربری تکراری می باشد!");
 
-            var userCreated = new User() { Username = userForRegisterVM.Username };
+            var userCreated = _mapper.Map<User>(userForRegisterVM);
             var createdUser = await _AuthRepository.Register(userCreated, userForRegisterVM.Password);
-            return StatusCode(201, createdUser);
+            return CreatedAtRoute("Get", new { controller = "User", id = createdUser.Id }, createdUser);
         }
 
         [HttpPost("Login")]

@@ -5,7 +5,7 @@
   <h3>
     Find Your Match By Register To App
   </h3>
-  <button type="button" class="btn btn-danger" [routerLink]="['/register']">
+  <button type="button" class="btn btn-danger" [routerLink]="['/register']" *ngIf="!isLoggin()">
     Register
   </button>
 </div>

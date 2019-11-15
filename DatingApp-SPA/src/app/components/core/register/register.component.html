@@ -1,19 +1,71 @@
-<h2 class="text-center">Register User</h2>
-<hr>
 <div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h2 class="text-center">Register User</h2>
+    <hr>
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
       <div class="form-group">
-        <label for="exampleInputEmail1">Username</label>
-        <input type="email" class="form-control" placeholder="Username" formControlName="username">
+        <label class="control-label" style="margin-right:10px">I am a: </label>
+        <label class="radio-inline">
+          <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+        </label>
+        <label class="radio-inline ml-3">
+          <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+        </label>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" placeholder="Password" formControlName="password">
+        <label>Username</label>
+        <input type="email" class="form-control" placeholder="Username" formControlName="username">
+        <div *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched &&
+           !registerForm.get('username').errors.usernameForbidden" class="invalid">Please
+          Enter Username</div>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+      <div class="form-group">
+        <label>KnownAs</label>
+        <input class=" form-control" placeholder="Known as" formControlName="knownAs">
+        <div class="invalid" *ngIf="registerForm.get('knownAs').touched && !registerForm.get('knownAs').valid">
+          Known as is required</div>
+      </div>
+      <div class="form-group">
+        <label>Date Of Birth</label>
+        <input class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth" type="text" bsDatepicker
+          [bsConfig]="bsConfig">
+        <div class="invalid" *ngIf="registerForm.get('dateOfBirth').touched && !registerForm.get('dateOfBirth').valid">
+          Date of Birth is required</div>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input class="form-control" placeholder="City" formControlName="city">
+        <div class="invalid" *ngIf="registerForm.get('city').touched && !registerForm.get('city').valid">
+          City is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Country</label>
+        <input class="form-control" placeholder="Country" formControlName="country">
+        <div class="invalid" *ngIf="registerForm.get('country').touched && !registerForm.get('country').valid">
+          Country is required</div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" placeholder="Password" formControlName="password">
+        <div *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched" class="invalid">Please
+          Enter Password</div>
+      </div>
+      <div class="form-group">
+        <label for="txtConfirm">Confirm Password</label>
+        <input type="password" id="txtConfirm" class="form-control" placeholder="Confirm Password"
+          formControlName="confirmPassword">
+        <div class="invalid"
+          *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
+          Please Enter Password Confirm</div>
+        <div class="invalid"
+          *ngIf="registerForm.hasError('notMatchPass') && registerForm.get('confirmPassword').touched">
+          Password Not Confirm</div>
+      </div>
+      <button type="submit" class="btn btn-success mr-1" [disabled]="!registerForm.valid">Register</button>
+      <button type="button" class="btn btn-danger" routerLink="/">Cancel</button>
     </form>
   </div>
-  <div class="col-md-2"></div>
+  <div class="col-md-3"></div>
 </div>
