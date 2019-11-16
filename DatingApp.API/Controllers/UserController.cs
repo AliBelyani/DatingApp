@@ -64,5 +64,21 @@ namespace DatingApp.API.Controllers
             return NoContent();
         }
 
+        [HttpPost("{likerId}/{likeeId}")]
+        public async Task<IActionResult> GetLike(int likerId, int likeeId)
+        {
+            var like = await _DatingRepository.GetLike(likerId, likeeId);
+            if (like != null)
+                return BadRequest("You Already Like This User");
+
+            if (await _DatingRepository.GetUser(likeeId) == null)
+                return NotFound("User Not Found!");
+
+            Like newLike = new Like() { LikerId = likerId, LikeeId = likeeId };
+            _DatingRepository.Add<Like>(newLike);
+            await _DatingRepository.SaveAll();
+            return Ok();
+        }
+
     }
 }

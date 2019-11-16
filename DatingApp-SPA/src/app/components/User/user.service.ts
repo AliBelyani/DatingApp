@@ -25,10 +25,13 @@ export class UserService {
     }
 
     if (userParam !== undefined) {
-      reqParams = reqParams.append('gender', userParam.gender);
-      reqParams = reqParams.append('minAge', userParam.minAge.toString());
-      reqParams = reqParams.append('maxAge', userParam.maxAge.toString());
+      console.log(userParam);
+      reqParams = reqParams.append('gender', userParam.gender !== undefined ? userParam.gender : '');
+      reqParams = reqParams.append('minAge', userParam.minAge !== undefined ? userParam.minAge.toString() : '0');
+      reqParams = reqParams.append('maxAge', userParam.maxAge !== undefined ? userParam.maxAge.toString() : '100');
       reqParams = reqParams.append('orderBy', userParam.orderBy);
+      reqParams = reqParams.append('like', userParam.like === true ? 'true' : 'false');
+      console.log(reqParams);
     }
 
     return this.httpClient.get<User[]>(this.baseUrl + 'user/', { observe: 'response', params: reqParams }).pipe(
@@ -58,6 +61,10 @@ export class UserService {
 
   deletePhoto(id: number) {
     return this.httpClient.delete(this.baseUrl + 'photo/' + id);
+  }
+
+  sendLike(userId: number, likeeId: number) {
+    return this.httpClient.post(this.baseUrl + 'user/' + userId + '/' + likeeId, null);
   }
 
 }

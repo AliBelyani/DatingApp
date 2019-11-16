@@ -21,5 +21,7 @@ namespace DatingApp.API.model.Entities.Users
         public string Country { get; set; }
 
         public ICollection<UserPhoto> UserPhoto { get; set; }
+        public ICollection<Like> Likers { get; set; }
+        public ICollection<Like> Likees { get; set; }
     }
 }

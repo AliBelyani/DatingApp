@@ -22,5 +22,10 @@ namespace DatingApp.API.model.VM.UserVM
         public int MaxAge { get; set; } = 99;
 
         public string OrderBy { get; set; }
+
+        /// <summary>
+        /// True:Likers,False:Likees
+        /// </summary>
+        public bool? Like { get; set; } = null;
     }
 }

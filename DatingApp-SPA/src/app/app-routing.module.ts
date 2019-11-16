@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'member', canActivate: [AuthGuard], loadChildren: './components/Member/member.module#MemberModule' },
   { path: 'message', canActivate: [AuthGuard], loadChildren: './components/Message/message.module#MessageModule' },
+  { path: 'user', canActivate: [AuthGuard], loadChildren: './components/User/user.module#UserModule' },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

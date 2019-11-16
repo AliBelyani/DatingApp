@@ -28,4 +28,5 @@ export class UserSearchParam {
   minAge: number;
   maxAge: number;
   orderBy: string;
+  like: boolean;
 }

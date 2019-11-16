@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.API.model;
 using DatingApp.API.model.Entities.Users;
@@ -15,5 +14,7 @@ namespace DatingApp.API.Repository
         Task<User> GetUser(int id);
         Task<UserPhoto> GetPhoto(int Id);
         Task<UserPhoto> GetMainPhoto(int userId);
+
+        Task<Like> GetLike(int likerId, int likeeId);
     }
 }
